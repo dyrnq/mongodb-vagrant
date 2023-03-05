@@ -15,13 +15,27 @@ vagrant up vm216
 ## start mongo
 
 ```bash
-vagrant ssh vm214 --command "bash /vagrant/scripts/install-mongodb.sh"
-vagrant ssh vm215 --command "bash /vagrant/scripts/install-mongodb.sh"
-vagrant ssh vm216 --command "bash /vagrant/scripts/install-mongodb.sh"
+## login vm214 vm215 vm216 and exec bash /vagrant/scripts/install-mongodb.sh use root
+vagrant ssh vm214
+[vagrant@vm214 ~]$ su --login root
+[root@vm214 ~]# bash /vagrant/scripts/install-mongodb.sh
 ```
 
 ```bash
-vagrant ssh vm216 --command "bash /vagrant/scripts/init-mongodb.sh"
+## login vm216 and exec bash /vagrant/scripts/init-mongodb.sh use root
+[vagrant@vm216 ~]$ su --login root
+[root@vm216 ~]# bash /vagrant/scripts/init-mongodb.sh
+```
+
+```bash
+docker run -d \
+--restart always \
+--name me \
+-e ME_CONFIG_MONGODB_SERVER=192.168.55.214,192.168.55.215,192.168.55.216 \
+-e ME_CONFIG_MONGODB_PORT=27017 \
+-e ME_CONFIG_BASICAUTH_USERNAME=admin \
+-e ME_CONFIG_BASICAUTH_PASSWORD=admin \
+-p 8081:8081 mongo-express:latest
 ```
 
 ## help
