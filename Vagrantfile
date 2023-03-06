@@ -7,7 +7,7 @@
 # you're doing.
 
 Vagrant.configure("2") do |config|
-    config.vm.box = "centos/7"
+    config.vm.box = "ubuntu/focal64"
 
     config.vm.box_check_update = false
     config.ssh.insert_key = false
@@ -37,6 +37,8 @@ Vagrant.configure("2") do |config|
             end
 
             machine.vm.provision "shell", inline: <<-SHELL
+                echo "root:vagrant" | sudo chpasswd
+                timedatectl set-timezone "Asia/Shanghai"
                 curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/dyrnq/install-docker/main/install-docker.sh | bash -s docker \
                 --mirror sjtu \
                 --version 20.10.23 \
