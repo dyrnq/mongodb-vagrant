@@ -2,6 +2,19 @@
 
 This is an experiment on mongodb.
 
+<!-- TOC -->
+
+- [mongodb-vagrant](#mongodb-vagrant)
+  - [usage](#usage)
+    - [start vm](#start-vm)
+    - [start mongo](#start-mongo)
+    - [root user](#root-user)
+    - [web ui](#web-ui)
+  - [help](#help)
+  - [ref](#ref)
+
+<!-- /TOC -->
+
 ## usage
 
 ### start vm
@@ -12,7 +25,7 @@ vagrant up vm215
 vagrant up vm216
 ```
 
-## start mongo
+### start mongo
 
 ```bash
 ## login vm214 vm215 vm216 and exec bash /vagrant/scripts/install-mongodb.sh use root
@@ -27,8 +40,7 @@ vagrant ssh vm214
 [root@vm216 ~]# bash /vagrant/scripts/init-mongodb.sh
 ```
 
-
-## root user
+### root user
 
 ```bash
 ## login vm216 and exec only
@@ -36,7 +48,7 @@ vagrant ssh vm214
 [vagrant@vm216 ~]$ bash /vagrant/scripts/init-user.sh
 ```
 
-## web ui
+### web ui
 
 ```bash
 docker rm -f me 2>/dev/null || true
