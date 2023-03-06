@@ -39,15 +39,13 @@ vagrant ssh vm214
 ## web ui
 
 ```bash
+docker rm -f me 2>/dev/null || true
 docker run -d \
 --restart always \
 --name me \
--e ME_CONFIG_MONGODB_SERVER=192.168.55.214,192.168.55.215,192.168.55.216 \
--e ME_CONFIG_MONGODB_PORT=27017 \
+-e ME_CONFIG_MONGODB_URL=mongodb://root:root@192.168.55.214:27017 \
 -e ME_CONFIG_BASICAUTH_USERNAME="" \
 -e ME_CONFIG_MONGODB_ENABLE_ADMIN=true \
--e ME_CONFIG_MONGODB_AUTH_USERNAME=root \
--e ME_CONFIG_MONGODB_AUTH_PASSWORD=root \
 -p 8081:8081 mongo-express:latest
 
 
@@ -58,8 +56,10 @@ docker run -d \
 # -p 8080:8080 \
 # adminer:4.8.1
 
-
-docker run -it --rm \
+docker rm -f mongo-gui 2>/dev/null || true
+docker run -d \
+--restart always \
+--name mongo-gui \
 -p 4321:4321 \
 -e MONGO_URL=mongodb://root:root@192.168.55.214:27017 \
 ugleiton/mongo-gui:latest
