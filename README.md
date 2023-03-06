@@ -38,6 +38,14 @@ docker run -d \
 -p 8081:8081 mongo-express:latest
 ```
 
+## root user
+
+```bash
+## login vm216 and exec only
+[vagrant@vm216 ~]$ su --login root
+[vagrant@vm216 ~]$ bash /vagrant/scripts/init-user.sh
+```
+
 ## help
 
 ```bash
@@ -253,3 +261,8 @@ echo $HOME
 - [https://mp.weixin.qq.com/s/JwM7rsp0HxqsZddpxpQrhg](https://mp.weixin.qq.com/s/JwM7rsp0HxqsZddpxpQrhg)
 - [https://hub.docker.com/_/mongo/](https://hub.docker.com/_/mongo/)
 - [eugenechen0514/demo_mongo_cluster](https://github.com/eugenechen0514/demo_mongo_cluster)
+- [Deploy a production-mongodb cluster](https://medium.com/@hoannt.it/deploy-a-production-mongodb-cluster-1e4097032321)
+- [MongoDB](http://devgou.com/article/MongoDB/)
+- [MongoDB 分片集群技术](https://www.cnblogs.com/clsn/p/8214345.html)
+- [Configuration File Settings and Command-Line Options Mapping](https://www.mongodb.com/docs/manual/reference/configuration-file-settings-command-line-options-mapping/#std-label-conf-file-command-line-mapping)
+- [Dockerfile](https://github.com/docker-library/mongo/blob/master/6.0/Dockerfile)
