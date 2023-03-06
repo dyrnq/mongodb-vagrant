@@ -27,16 +27,6 @@ vagrant ssh vm214
 [root@vm216 ~]# bash /vagrant/scripts/init-mongodb.sh
 ```
 
-```bash
-docker run -d \
---restart always \
---name me \
--e ME_CONFIG_MONGODB_SERVER=192.168.55.214,192.168.55.215,192.168.55.216 \
--e ME_CONFIG_MONGODB_PORT=27017 \
--e ME_CONFIG_BASICAUTH_USERNAME=admin \
--e ME_CONFIG_BASICAUTH_PASSWORD=admin \
--p 8081:8081 mongo-express:latest
-```
 
 ## root user
 
@@ -44,6 +34,35 @@ docker run -d \
 ## login vm216 and exec only
 [vagrant@vm216 ~]$ su --login root
 [vagrant@vm216 ~]$ bash /vagrant/scripts/init-user.sh
+```
+
+## web ui
+
+```bash
+docker run -d \
+--restart always \
+--name me \
+-e ME_CONFIG_MONGODB_SERVER=192.168.55.214,192.168.55.215,192.168.55.216 \
+-e ME_CONFIG_MONGODB_PORT=27017 \
+-e ME_CONFIG_BASICAUTH_USERNAME="" \
+-e ME_CONFIG_MONGODB_ENABLE_ADMIN=true \
+-e ME_CONFIG_MONGODB_AUTH_USERNAME=root \
+-e ME_CONFIG_MONGODB_AUTH_PASSWORD=root \
+-p 8081:8081 mongo-express:latest
+
+
+# docker rm -f adminer
+# docker run -d \
+# --name=adminer \
+# --restart always \
+# -p 8080:8080 \
+# adminer:4.8.1
+
+
+docker run -it --rm \
+-p 4321:4321 \
+-e MONGO_URL=mongodb://root:root@192.168.55.214:27017 \
+ugleiton/mongo-gui:latest
 ```
 
 ## help
